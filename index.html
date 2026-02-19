@@ -4,7 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gelatería La Dulce Vida 🍦 | La Habana</title>
-    <meta name="description" content="Helados italianos artesanales en el corazón de La Habana Vieja. Ingredientes naturales y ambiente familiar.">
+    <meta name="description" content="Helados italianos artesanales en el corazón de La Habana Vieja. Ingredientes naturales, sabores tropicales y ambiente familiar.">
+    <meta name="keywords" content="helado, gelato, la habana, cuba, postres, heladería italiana, obispo, cafe">
+    <meta name="author" content="La Dulce Vida">
+
+    <!-- Open Graph / SEO (Facebook, WhatsApp) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ladulcevidahabana.com/">
+    <meta property="og:title" content="Gelatería La Dulce Vida 🍦 | El mejor helado de La Habana">
+    <meta property="og:description" content="Auténtico gelato italiano con frutas cubanas. Visítanos en La Habana Vieja.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1560008581-09826d1de69e?q=80&w=1200&auto=format&fit=crop">
+
+    <!-- Performance Hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <!-- Critical CSS to prevent FOUC -->
+    <style>
+        /* Base styles defined before Tailwind loads to prevent flash */
+        body {
+            background-color: #FFFDF7; /* cream */
+            color: #8B4513; /* chocolate */
+        }
+        .dark body {
+            background-color: #171717; /* neutral-900 */
+            color: #f3f4f6; /* gray-100 */
+        }
+    </style>
     
     <!-- Script to prevent FOUC (Flash of Unstyled Content) for Dark Mode -->
     <script>
@@ -68,18 +96,39 @@
         #mobile-menu {
             transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
+        
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
-
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.575.0",
+    "react/": "https://esm.sh/react@^19.2.4/"
+  }
+}
 </script>
 </head>
 <body class="bg-cream dark:bg-neutral-900 text-chocolate dark:text-gray-100 font-sans antialiased selection:bg-icepink selection:text-white transition-colors duration-300">
 
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5355555555" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:bg-[#128C7E] transition-all duration-300 hover:scale-110 flex items-center justify-center group" aria-label="Chat en WhatsApp">
+        <i class="ph-fill ph-whatsapp-logo text-3xl group-hover:animate-bounce"></i>
+        <!-- Tooltip -->
+        <span class="absolute right-full mr-3 bg-white text-chocolate px-3 py-1 rounded-lg text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none hidden md:block">
+            ¡Haz tu pedido!
+        </span>
+    </a>
+
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-cream/90 dark:bg-neutral-900/90 backdrop-blur-md shadow-sm border-b border-chocolate/5 dark:border-white/5">
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-cream/90 dark:bg-neutral-900/90 backdrop-blur-md shadow-sm border-b border-chocolate/5 dark:border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer transition-transform hover:scale-105">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer transition-transform hover:scale-105" onclick="window.scrollTo(0,0)">
                     <i class="ph-fill ph-ice-cream text-icepink text-3xl"></i>
                     <a href="#" class="font-serif font-bold text-2xl text-chocolate dark:text-white tracking-tight">
                         La Dulce Vida 🍦
@@ -92,6 +141,7 @@
                         <a href="#inicio" data-i18n="nav_home" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Inicio</a>
                         <a href="#nosotros" data-i18n="nav_about" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Nosotros</a>
                         <a href="#sabores" data-i18n="nav_flavors" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Sabores</a>
+                        <a href="#menu-lista" data-i18n="nav_menu" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Menú</a>
                         <a href="#galeria" data-i18n="nav_gallery" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Galería</a>
                         <a href="#resenas" data-i18n="nav_reviews" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Reseñas</a>
                         <a href="#ubicacion" data-i18n="nav_location" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Ubicación</a>
@@ -130,6 +180,7 @@
                 <a href="#inicio" data-i18n="nav_home" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Inicio</a>
                 <a href="#nosotros" data-i18n="nav_about" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Nosotros</a>
                 <a href="#sabores" data-i18n="nav_flavors" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Sabores</a>
+                <a href="#menu-lista" data-i18n="nav_menu" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Menú</a>
                 <a href="#galeria" data-i18n="nav_gallery" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Galería</a>
                 <a href="#ubicacion" data-i18n="nav_location" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Ubicación</a>
                 <a href="#contacto" data-i18n="nav_contact" class="mobile-link block px-3 py-3 rounded-md text-base font-bold text-icepink hover:bg-icepink/10 dark:hover:bg-neutral-700">Contacto</a>
@@ -147,14 +198,14 @@
     <section id="inicio" class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
-            <img src="./images/background.jpg" alt="Background" class="w-full h-full object-cover" loading="eager">
+            <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?q=80&w=2000&auto=format&fit=crop" alt="Helado artesanal en La Habana" class="w-full h-full object-cover" loading="eager">
             <div id="hero-overlay" class="absolute inset-0 bg-black/40 dark:bg-black/60 transition-opacity duration-1000 opacity-0"></div>
         </div>
 
         <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16">
             <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg animate-float">
-                <span data-i18n="hero_title_prefix">Gelatería</span> <br>
-                <span class="text-icepink text-6xl md:text-8xl">La Dulce Vida</span>
+                <span data-i18n="hero_title_prefix" class="block font-sans text-sm md:text-xl font-bold uppercase tracking-[0.3em] mb-2 text-white/90">Gelatería</span>
+                <span class="text-icepink text-6xl md:text-9xl tracking-tight">La Dulce Vida</span>
             </h1>
             <p data-i18n="hero_subtitle" class="text-xl md:text-2xl text-cream mb-10 font-light drop-shadow-md max-w-2xl mx-auto">
                 Helados italianos artesanales • La Habana Vieja
@@ -178,7 +229,8 @@
             <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20 fade-in-section">
                 <div class="w-full md:w-1/2 relative group">
                     <div class="absolute inset-0 bg-icemint rounded-2xl transform rotate-3 scale-105 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
-                    <img src="./images/Logo.jpg" alt="Logo" class="relative rounded-2xl shadow-2xl w-full h-auto object-cover transform transition-transform duration-500 hover:scale-[1.02] dark:opacity-90">
+                    <!-- Realistic shop interior image -->
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=800&auto=format&fit=crop" alt="Nuestra Gelatería Vitrina" class="relative rounded-2xl shadow-2xl w-full h-auto object-cover transform transition-transform duration-500 hover:scale-[1.02] dark:opacity-90">
                 </div>
                 <div class="w-full md:w-1/2 text-center md:text-left">
                     <span data-i18n="about_badge" class="text-icepink font-bold tracking-wider uppercase text-sm mb-2 block">Sobre Nosotros</span>
@@ -213,95 +265,269 @@
                 <p data-i18n="menu_subtitle" class="mt-4 text-gray-600 dark:text-gray-400">Frescos del día, cremosos y deliciosos.</p>
             </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Limón -->
-                    <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
-                        <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
-                            <img src="https://picsum.photos/id/669/600/600" alt="Limón" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                            <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                                <i class="ph-fill ph-star inline mr-1"></i><span data-i18n="tag_popular">Popular</span>
-                            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Flavor Cards with Hover Scale Effect -->
+                <!-- Limón -->
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                    <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=600&auto=format&fit=crop" alt="Helado de Limón" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                        <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+                            <i class="ph-fill ph-star inline mr-1"></i><span data-i18n="tag_popular">Popular</span>
                         </div>
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 data-i18n="flavor_lemon" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Limón</h3>
-                            <span class="text-2xl">🍋</span>
-                        </div>
-                        <p data-i18n="flavor_lemon_desc" class="text-gray-600 dark:text-gray-300 text-sm">Refrescante y ácido, perfecto para el calor de Cuba.</p>
                     </div>
-                
-                    <!-- Amarena -->
-                    <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
-                        <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
-                            <img src="https://picsum.photos/id/201/600/600" alt="Amarena" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                        </div>
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="font-serif text-2xl font-bold text-chocolate dark:text-white">Amarena</h3>
-                            <span class="text-2xl">🍒</span>
-                        </div>
-                        <p data-i18n="flavor_amarena_desc" class="text-gray-600 dark:text-gray-300 text-sm">Crema con deliciosas cerezas negras italianas.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 data-i18n="flavor_lemon" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Limón</h3>
+                        <span class="text-2xl">🍋</span>
                     </div>
-                
-                    <!-- Guayaba -->
-                    <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
-                        <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
-                            <img src="https://picsum.photos/id/1060/600/600" alt="Guayaba" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                            <div class="absolute top-2 right-2 bg-icemint text-teal-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                                <i class="ph-fill ph-leaf inline mr-1"></i><span data-i18n="tag_vegan">Vegano</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 data-i18n="flavor_guava" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Guayaba</h3>
-                            <span class="text-2xl">🍈</span>
-                        </div>
-                        <p data-i18n="flavor_guava_desc" class="text-gray-600 dark:text-gray-300 text-sm">El sabor de la isla. Pura fruta tropical.</p>
+                    <p data-i18n="flavor_lemon_desc" class="text-gray-600 dark:text-gray-300 text-sm">Refrescante y ácido, perfecto para el calor de Cuba.</p>
+                </div>
+
+                <!-- Amarena -->
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                    <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=600&auto=format&fit=crop" alt="Helado Amarena" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
                     </div>
-                
-                    <!-- Melón -->
-                    <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
-                        <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
-                            <img src="https://picsum.photos/id/870/600/600" alt="Melón" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                            <div class="absolute top-2 right-2 bg-icemint text-teal-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                                <i class="ph-fill ph-leaf inline mr-1"></i><span data-i18n="tag_vegan">Vegano</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 data-i18n="flavor_melon" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Melón</h3>
-                            <span class="text-2xl">🍉</span>
-                        </div>
-                        <p data-i18n="flavor_melon_desc" class="text-gray-600 dark:text-gray-300 text-sm">Dulce, suave y muy hidratante.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-serif text-2xl font-bold text-chocolate dark:text-white">Amarena</h3>
+                        <span class="text-2xl">🍒</span>
                     </div>
-                
-                    <!-- Fruta Bomba / Papaya -->
-                    <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
-                        <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
-                            <img src="https://picsum.photos/id/1018/600/600" alt="Fruta Bomba" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                            <div class="absolute top-2 right-2 bg-icemint text-teal-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                                <i class="ph-fill ph-leaf inline mr-1"></i><span data-i18n="tag_vegan">Vegano</span>
-                            </div>
+                    <p data-i18n="flavor_amarena_desc" class="text-gray-600 dark:text-gray-300 text-sm">Crema con deliciosas cerezas negras italianas.</p>
+                </div>
+
+                <!-- Guayaba -->
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                    <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?q=80&w=600&auto=format&fit=crop" alt="Helado de Guayaba" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                        <div class="absolute top-2 right-2 bg-icemint text-teal-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+                            <i class="ph-fill ph-leaf inline mr-1"></i><span data-i18n="tag_vegan">Vegano</span>
                         </div>
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 data-i18n="flavor_papaya" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Fruta Bomba</h3>
-                            <span class="text-2xl">🟠</span>
-                        </div>
-                        <p data-i18n="flavor_papaya_desc" class="text-gray-600 dark:text-gray-300 text-sm">Textura cremosa natural de la fruta bomba.</p>
                     </div>
-                
-                    <!-- Chocolate -->
-                    <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
-                        <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
-                            <img src="https://picsum.photos/id/292/600/600" alt="Chocolate" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                        </div>
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="font-serif text-2xl font-bold text-chocolate dark:text-white">Chocolate</h3>
-                            <span class="text-2xl">🍫</span>
-                        </div>
-                        <p data-i18n="flavor_chocolate_desc" class="text-gray-600 dark:text-gray-300 text-sm">Intenso, oscuro y adictivo.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 data-i18n="flavor_guava" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Guayaba</h3>
+                        <span class="text-2xl">🍈</span>
                     </div>
+                    <p data-i18n="flavor_guava_desc" class="text-gray-600 dark:text-gray-300 text-sm">El sabor de la isla. Pura fruta tropical.</p>
+                </div>
+
+                <!-- Melón -->
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                    <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=600&auto=format&fit=crop" alt="Helado de Melón" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                        <div class="absolute top-2 right-2 bg-icemint text-teal-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+                            <i class="ph-fill ph-leaf inline mr-1"></i><span data-i18n="tag_vegan">Vegano</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 data-i18n="flavor_melon" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Melón</h3>
+                        <span class="text-2xl">🍉</span>
+                    </div>
+                    <p data-i18n="flavor_melon_desc" class="text-gray-600 dark:text-gray-300 text-sm">Dulce, suave y muy hidratante.</p>
+                </div>
+
+                <!-- Papaya -->
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                    <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?q=80&w=600&auto=format&fit=crop" alt="Helado de Fruta Bomba" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                        <div class="absolute top-2 right-2 bg-icemint text-teal-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+                            <i class="ph-fill ph-leaf inline mr-1"></i><span data-i18n="tag_vegan">Vegano</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 data-i18n="flavor_papaya" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Fruta Bomba</h3>
+                        <span class="text-2xl">🟠</span>
+                    </div>
+                    <p data-i18n="flavor_papaya_desc" class="text-gray-600 dark:text-gray-300 text-sm">Textura cremosa natural de la fruta bomba.</p>
+                </div>
+
+                <!-- Chocolate -->
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                    <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=600&auto=format&fit=crop" alt="Helado de Chocolate" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-serif text-2xl font-bold text-chocolate dark:text-white">Chocolate</h3>
+                        <span class="text-2xl">🍫</span>
+                    </div>
+                    <p data-i18n="flavor_chocolate_desc" class="text-gray-600 dark:text-gray-300 text-sm">Intenso, oscuro y adictivo.</p>
                 </div>
             </div>
             
             <div class="mt-12 text-center">
                  <p data-i18n="menu_more" class="text-chocolate dark:text-gray-300 font-medium italic">...y muchos más: Tiramisú, Stracciatella, Naranja.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Menu Section -->
+    <section id="menu-lista" class="py-24 bg-cream dark:bg-neutral-900 transition-colors duration-300 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-section">
+                <h2 data-i18n="menu_section_title" class="font-serif text-4xl font-bold text-chocolate dark:text-white mb-4">Carta de Precios</h2>
+                <div class="h-1 w-24 bg-icepink mx-auto rounded-full"></div>
+            </div>
+
+            <!-- House Special -->
+            <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8 mb-12 border-2 border-icepink/20 fade-in-section transform hover:scale-[1.01] transition-transform">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+                    <div>
+                        <span data-i18n="cat_special" class="text-icepink font-bold tracking-wider uppercase text-sm mb-2 block">Especial de la Casa</span>
+                        <h3 data-i18n="item_copa_dv" class="font-serif text-3xl font-bold text-chocolate dark:text-white mb-2">Copa Dulce Vida</h3>
+                        <p data-i18n="desc_copa_dv" class="text-gray-600 dark:text-gray-300">3 raciones + 2 agregos dulces a elección</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-3xl font-bold text-chocolate dark:text-icepink">$2500</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Showcase Items -->
+                <div class="fade-in-section">
+                    <h3 data-i18n="cat_showcase" class="font-serif text-2xl font-bold text-chocolate dark:text-white mb-6 border-b border-chocolate/10 pb-2">Disponibles en Vitrina</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-baseline">
+                            <div>
+                                <span data-i18n="item_capricho" class="font-bold text-gray-800 dark:text-gray-200">Capricho</span>
+                                <p data-i18n="desc_capricho" class="text-sm text-gray-500 dark:text-gray-400">Barquillo de 1 ración con cobertura</p>
+                            </div>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$570</span>
+                        </li>
+                         <li class="flex justify-between items-baseline">
+                            <div>
+                                <span data-i18n="item_paletas" class="font-bold text-gray-800 dark:text-gray-200">Paletas</span>
+                                <p data-i18n="desc_paletas" class="text-sm text-gray-500 dark:text-gray-400">Paletas Heladas con cobertura</p>
+                            </div>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$650</span>
+                        </li>
+                         <li class="flex justify-between items-baseline">
+                            <div>
+                                <span data-i18n="item_tacos" class="font-bold text-gray-800 dark:text-gray-200">Tacos</span>
+                                <p data-i18n="desc_tacos" class="text-sm text-gray-500 dark:text-gray-400">Wafle taco con helado y cobertura</p>
+                            </div>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$700</span>
+                        </li>
+                        <!-- Delicias -->
+                        <li class="flex flex-col">
+                             <div class="flex justify-between items-baseline">
+                                <span data-i18n="item_delicias" class="font-bold text-gray-800 dark:text-gray-200">Delicias (Nata con Helado)</span>
+                            </div>
+                            <div class="flex justify-between text-sm pl-4 mt-1">
+                                <span data-i18n="size_small" class="text-gray-500 dark:text-gray-400">Pequeñas</span>
+                                <span class="font-mono font-bold text-chocolate dark:text-icepink">$700</span>
+                            </div>
+                            <div class="flex justify-between text-sm pl-4">
+                                <span data-i18n="size_large" class="text-gray-500 dark:text-gray-400">Grandes</span>
+                                <span class="font-mono font-bold text-chocolate dark:text-icepink">$1400</span>
+                            </div>
+                        </li>
+                        <li class="flex justify-between items-baseline">
+                            <span data-i18n="item_cake" class="font-bold text-gray-800 dark:text-gray-200">Rebanada de Tarta Helada</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$960</span>
+                        </li>
+                        <!-- Copas Group -->
+                        <li class="flex flex-col mt-2">
+                             <span data-i18n="item_copas" class="font-bold text-chocolate dark:text-white border-b border-dashed border-gray-300 pb-1 mb-2">Copas</span>
+                             <div class="space-y-2 pl-2">
+                                <div class="flex justify-between text-sm">
+                                    <span data-i18n="desc_nevada" class="text-gray-600 dark:text-gray-300">Nevada (2 raciones)</span>
+                                    <span class="font-mono font-bold">$1200</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span data-i18n="desc_acapulco" class="text-gray-600 dark:text-gray-300">Acapulco (3 raciones)</span>
+                                    <span class="font-mono font-bold">$1600</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span data-i18n="desc_alaska" class="text-gray-600 dark:text-gray-300">Alaska (4 raciones)</span>
+                                    <span class="font-mono font-bold">$2200</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span data-i18n="desc_rockbar" class="text-gray-600 dark:text-gray-300">Rock Bar (5 raciones)</span>
+                                    <span class="font-mono font-bold">$2500</span>
+                                </div>
+                             </div>
+                        </li>
+                        <!-- Conchas -->
+                        <li class="flex flex-col mt-2">
+                             <span data-i18n="item_conchas" class="font-bold text-chocolate dark:text-white border-b border-dashed border-gray-300 pb-1 mb-2">Conchas</span>
+                             <div class="space-y-2 pl-2">
+                                <div class="flex justify-between text-sm">
+                                    <span data-i18n="desc_2scoops" class="text-gray-600 dark:text-gray-300">2 raciones</span>
+                                    <span class="font-mono font-bold">$1070</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span data-i18n="desc_3scoops" class="text-gray-600 dark:text-gray-300">3 raciones</span>
+                                    <span class="font-mono font-bold">$1350</span>
+                                </div>
+                             </div>
+                        </li>
+                        <li class="flex justify-between items-baseline pt-2">
+                            <span data-i18n="item_shake" class="font-bold text-gray-800 dark:text-gray-200">Batidos</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$1200</span>
+                        </li>
+                         <!-- Barquillos -->
+                         <li class="flex flex-col mt-2">
+                             <span data-i18n="item_cones" class="font-bold text-chocolate dark:text-white border-b border-dashed border-gray-300 pb-1 mb-2">Barquillos</span>
+                             <div class="space-y-2 pl-2">
+                                <div class="flex justify-between text-sm">
+                                    <span data-i18n="desc_1scoop" class="text-gray-600 dark:text-gray-300">1 ración</span>
+                                    <span class="font-mono font-bold">$490</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span data-i18n="desc_2scoops" class="text-gray-600 dark:text-gray-300">2 raciones</span>
+                                    <span class="font-mono font-bold">$840</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span data-i18n="desc_3scoops" class="text-gray-600 dark:text-gray-300">3 raciones</span>
+                                    <span class="font-mono font-bold">$1180</span>
+                                </div>
+                             </div>
+                        </li>
+                        <li class="flex justify-between items-baseline pt-2">
+                            <span data-i18n="item_spaghetti" class="font-bold text-gray-800 dark:text-gray-200">Espaguetti de helado</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$1700</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Drinks -->
+                <div class="fade-in-section" style="transition-delay: 200ms">
+                    <h3 data-i18n="cat_drinks" class="font-serif text-2xl font-bold text-chocolate dark:text-white mb-6 border-b border-chocolate/10 pb-2">Para Beber</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-baseline">
+                            <span data-i18n="item_espresso" class="font-bold text-gray-800 dark:text-gray-200">Café expreso</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$400</span>
+                        </li>
+                        <li class="flex justify-between items-baseline">
+                            <span data-i18n="item_affogato" class="font-bold text-gray-800 dark:text-gray-200">Café ahogado</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$900</span>
+                        </li>
+                        <li class="flex justify-between items-baseline">
+                            <span data-i18n="item_water" class="font-bold text-gray-800 dark:text-gray-200">Agua</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$250</span>
+                        </li>
+                        <li class="flex justify-between items-baseline">
+                            <span data-i18n="item_sparkling" class="font-bold text-gray-800 dark:text-gray-200">Agua gaseada</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$500</span>
+                        </li>
+                        <li class="flex justify-between items-baseline">
+                            <span data-i18n="item_juice" class="font-bold text-gray-800 dark:text-gray-200">Jugo</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$350</span>
+                        </li>
+                        <li class="flex justify-between items-baseline">
+                            <span class="font-bold text-gray-800 dark:text-gray-200">Pepsi</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$600</span>
+                        </li>
+                        <li class="flex justify-between items-baseline">
+                            <span class="font-bold text-gray-800 dark:text-gray-200">7UP / Fanta</span>
+                            <span class="font-mono font-bold text-chocolate dark:text-icepink">$700</span>
+                        </li>
+                    </ul>
+                    
+                    <!-- Decorative image for drinks/menu column -->
+                    <div class="mt-8 rounded-xl overflow-hidden shadow-lg opacity-90">
+                        <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcf8?q=80&w=800&auto=format&fit=crop" alt="Coffee and Ice Cream" class="w-full h-48 object-cover">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -314,19 +540,19 @@
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
                 <div class="col-span-2 row-span-2 overflow-hidden rounded-2xl shadow-lg fade-in-section">
-                     <img src="https://picsum.photos/id/431/800/800" alt="Gallery 1" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
+                     <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?q=80&w=800&auto=format&fit=crop" alt="Amigos comiendo helado" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
                 </div>
                 <div class="col-span-1 row-span-1 overflow-hidden rounded-2xl shadow-lg fade-in-section">
-                     <img src="https://picsum.photos/id/1015/400/400" alt="Gallery 2" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
+                     <img src="https://images.unsplash.com/photo-1579954115563-e72bf1381629?q=80&w=400&auto=format&fit=crop" alt="Conos de helado" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
                 </div>
                 <div class="col-span-1 row-span-1 overflow-hidden rounded-2xl shadow-lg fade-in-section">
-                     <img src="https://picsum.photos/id/292/400/400" alt="Gallery 3" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
+                     <img src="https://images.unsplash.com/photo-1557142046-c704a3adf364?q=80&w=400&auto=format&fit=crop" alt="Detalle helado" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
                 </div>
                 <div class="col-span-1 row-span-1 overflow-hidden rounded-2xl shadow-lg fade-in-section">
-                     <img src="https://picsum.photos/id/1018/400/400" alt="Gallery 4" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
+                     <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?q=80&w=400&auto=format&fit=crop" alt="Niño feliz" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
                 </div>
                 <div class="col-span-1 row-span-1 overflow-hidden rounded-2xl shadow-lg fade-in-section">
-                     <img src="https://picsum.photos/id/1060/400/400" alt="Gallery 5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
+                     <img src="https://images.unsplash.com/photo-1505394033641-40c6ad1178d1?q=80&w=400&auto=format&fit=crop" alt="Helado en la mano" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy">
                 </div>
             </div>
         </div>
@@ -413,10 +639,10 @@
                     </div>
                 </div>
                 <div class="lg:w-2/3 h-80 lg:h-auto bg-gray-200 dark:bg-gray-700 relative">
-                    <!-- Placeholder for Google Maps - Replace src with your actual Embed API link -->
+                    <!-- Correct Google Maps Embed for Obispo/Plaza Vieja area (Generic Havana View) -->
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.996173070624!2d-82.3537876844962!3d23.13682998489704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88cd774cbdf600e1%3A0x4e29433130983281!2sObispo%2C%20La%20Habana%2C%20Cuba!5e0!3m2!1ses!2s!4v1620000000000!5m2!1ses!2s" 
-                        class="absolute inset-0 w-full h-full grayscale-[50%] hover:grayscale-0 transition-all duration-500" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.9760737198647!2d-82.35287668503884!3d23.13739798489495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88cd774cbf614791%3A0xb36b222992440150!2sCalle%20Obispo%2C%20La%20Habana!5e0!3m2!1ses!2scu!4v1683830000000!5m2!1ses!2scu" 
+                        class="absolute inset-0 w-full h-full grayscale-[20%] hover:grayscale-0 transition-all duration-500" 
                         style="border:0;" 
                         allowfullscreen="" 
                         loading="lazy" 
@@ -439,21 +665,20 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label data-i18n="label_name" for="name" class="block text-sm font-medium text-chocolate dark:text-gray-300 mb-1">Nombre</label>
-                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-cream dark:bg-neutral-700 dark:text-white border border-gray-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all">
+                        <input type="text" id="name" name="name" data-i18n-placeholder="ph_name" placeholder="Tu nombre" required class="w-full px-4 py-3 bg-cream dark:bg-neutral-700 dark:text-white border border-gray-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500">
                     </div>
                     <div>
                         <label data-i18n="label_contact" for="contact" class="block text-sm font-medium text-chocolate dark:text-gray-300 mb-1">Email o WhatsApp</label>
-                        <input type="text" id="contact" name="contact" required class="w-full px-4 py-3 bg-cream dark:bg-neutral-700 dark:text-white border border-gray-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all">
+                        <input type="text" id="contact" name="contact" data-i18n-placeholder="ph_contact" placeholder="Correo o número" required class="w-full px-4 py-3 bg-cream dark:bg-neutral-700 dark:text-white border border-gray-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500">
                     </div>
                 </div>
                 <div>
                     <label data-i18n="label_message" for="message" class="block text-sm font-medium text-chocolate dark:text-gray-300 mb-1">Mensaje</label>
-                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-cream dark:bg-neutral-700 dark:text-white border border-gray-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all resize-none"></textarea>
+                    <textarea id="message" name="message" rows="4" data-i18n-placeholder="ph_message" placeholder="¿Cómo podemos ayudarte?" required class="w-full px-4 py-3 bg-cream dark:bg-neutral-700 dark:text-white border border-gray-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all resize-none placeholder-gray-400 dark:placeholder-gray-500"></textarea>
                 </div>
                 
                 <!-- Anti-spam & Config -->
                 <input type="hidden" name="_captcha" value="false">
-                <!-- Replace with your success page -->
                 <input type="hidden" name="_next" value="https://www.tudominio.com/gracias"> 
                 
                 <div class="text-center">
@@ -463,13 +688,6 @@
                     </button>
                 </div>
             </form>
-
-            <div class="mt-16 text-center fade-in-section">
-                 <a href="https://wa.me/5355555555" target="_blank" class="inline-flex items-center gap-2 bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-green-600 transition-all transform hover:scale-105">
-                     <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
-                     <span data-i18n="btn_whatsapp">Chatea por WhatsApp</span>
-                 </a>
-            </div>
         </div>
     </section>
 
@@ -493,8 +711,8 @@
         </div>
     </footer>
 
-    <!-- Back to top -->
-    <button id="backToTop" class="fixed bottom-6 right-6 p-3 bg-icepink text-white rounded-full shadow-lg translate-y-20 opacity-0 transition-all duration-300 z-40 hover:bg-pink-600">
+    <!-- Back to top (Adjusted Position) -->
+    <button id="backToTop" class="fixed bottom-24 right-6 p-3 bg-icepink text-white rounded-full shadow-lg translate-y-20 opacity-0 transition-all duration-300 z-40 hover:bg-pink-600">
         <i class="ph-bold ph-arrow-up text-xl"></i>
     </button>
 
@@ -505,6 +723,7 @@
                 nav_home: "Inicio",
                 nav_about: "Nosotros",
                 nav_flavors: "Sabores",
+                nav_menu: "Menú",
                 nav_gallery: "Galería",
                 nav_reviews: "Reseñas",
                 nav_location: "Ubicación",
@@ -549,16 +768,54 @@
                 label_name: "Nombre",
                 label_contact: "Email o WhatsApp",
                 label_message: "Mensaje",
+                ph_name: "Tu nombre",
+                ph_contact: "Correo o número",
+                ph_message: "¿Cómo podemos ayudarte?",
                 btn_send: "Enviar Mensaje",
                 btn_whatsapp: "Chatea por WhatsApp",
                 footer_rights: "&copy; 2026 Gelatería La Dulce Vida • La Habana, Cuba",
                 tag_popular: "Popular",
-                tag_vegan: "Vegano"
+                tag_vegan: "Vegano",
+                // Menu Translations ES
+                menu_section_title: "Carta de Precios",
+                cat_special: "Especial de la Casa",
+                cat_showcase: "Disponibles en Vitrina",
+                cat_drinks: "Para Beber",
+                item_copa_dv: "Copa Dulce Vida",
+                desc_copa_dv: "3 raciones + 2 agregos dulces a elección",
+                item_capricho: "Capricho",
+                desc_capricho: "Barquillo de 1 ración con cobertura",
+                item_paletas: "Paletas",
+                desc_paletas: "Paletas Heladas con cobertura",
+                item_tacos: "Tacos",
+                desc_tacos: "Wafle taco con helado y cobertura",
+                item_delicias: "Delicias (Nata con Helado)",
+                size_small: "Pequeñas",
+                size_large: "Grandes",
+                item_cake: "Rebanada de Tarta Helada",
+                item_copas: "Copas",
+                desc_nevada: "Nevada (2 raciones)",
+                desc_acapulco: "Acapulco (3 raciones)",
+                desc_alaska: "Alaska (4 raciones)",
+                desc_rockbar: "Rock Bar (5 raciones)",
+                item_conchas: "Conchas",
+                desc_2scoops: "2 raciones",
+                desc_3scoops: "3 raciones",
+                item_shake: "Batidos",
+                item_cones: "Barquillos",
+                desc_1scoop: "1 ración",
+                item_spaghetti: "Espaguetti de helado",
+                item_espresso: "Café expreso",
+                item_affogato: "Café ahogado",
+                item_water: "Agua",
+                item_sparkling: "Agua gaseada",
+                item_juice: "Jugo"
             },
             en: {
                 nav_home: "Home",
                 nav_about: "About",
                 nav_flavors: "Flavors",
+                nav_menu: "Menu",
                 nav_gallery: "Gallery",
                 nav_reviews: "Reviews",
                 nav_location: "Location",
@@ -603,11 +860,48 @@
                 label_name: "Name",
                 label_contact: "Email or WhatsApp",
                 label_message: "Message",
+                ph_name: "Your name",
+                ph_contact: "Email or number",
+                ph_message: "How can we help you?",
                 btn_send: "Send Message",
                 btn_whatsapp: "Chat on WhatsApp",
                 footer_rights: "&copy; 2026 La Dulce Vida Gelato • Havana, Cuba",
                 tag_popular: "Popular",
-                tag_vegan: "Vegan"
+                tag_vegan: "Vegan",
+                // Menu Translations EN
+                menu_section_title: "Price List",
+                cat_special: "House Special",
+                cat_showcase: "From the Showcase",
+                cat_drinks: "Drinks",
+                item_copa_dv: "Dulce Vida Cup",
+                desc_copa_dv: "3 scoops + 2 sweet toppings of choice",
+                item_capricho: "Caprice",
+                desc_capricho: "1 scoop cone with coating",
+                item_paletas: "Popsicles",
+                desc_paletas: "Ice cream popsicles with coating",
+                item_tacos: "Tacos",
+                desc_tacos: "Waffle taco with ice cream and coating",
+                item_delicias: "Delights (Cream w/ Ice Cream)",
+                size_small: "Small",
+                size_large: "Large",
+                item_cake: "Ice Cream Cake Slice",
+                item_copas: "Sundaes",
+                desc_nevada: "Nevada (2 scoops)",
+                desc_acapulco: "Acapulco (3 scoops)",
+                desc_alaska: "Alaska (4 scoops)",
+                desc_rockbar: "Rock Bar (5 scoops)",
+                item_conchas: "Shells (Waffle Bowl)",
+                desc_2scoops: "2 scoops",
+                desc_3scoops: "3 scoops",
+                item_shake: "Milkshakes",
+                item_cones: "Cones",
+                desc_1scoop: "1 scoop",
+                item_spaghetti: "Ice Cream Spaghetti",
+                item_espresso: "Espresso",
+                item_affogato: "Affogato",
+                item_water: "Water",
+                item_sparkling: "Sparkling Water",
+                item_juice: "Juice"
             }
         };
 
@@ -645,11 +939,18 @@
         }
 
         function updateContent(lang) {
+            // Update Text Content
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang][key]) {
-                    // Use innerHTML to allow simple HTML tags like <br> or <span>
                     element.innerHTML = translations[lang][key];
+                }
+            });
+            // Update Placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
                 }
             });
         }
@@ -763,9 +1064,6 @@
         });
     </script>
     
-    <!-- Versión mejorada con modo oscuro y bilingual - Hecha con ❤️ en Cuba -->
+    <!-- Versión mejorada con modo oscuro, whatsapp, bilingual completo y Menú de Precios -->
 </body>
 </html>
-
-
-
