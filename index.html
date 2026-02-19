@@ -6,6 +6,15 @@
     <title>Gelatería La Dulce Vida 🍦 | La Habana</title>
     <meta name="description" content="Helados italianos artesanales en el corazón de La Habana Vieja. Ingredientes naturales y ambiente familiar.">
     
+    <!-- Script to prevent FOUC (Flash of Unstyled Content) for Dark Mode -->
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     
@@ -13,6 +22,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -44,7 +54,6 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
-        /* Custom styles for things Tailwind handles differently */
         .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
@@ -56,7 +65,6 @@
             transform: none;
         }
         
-        /* Mobile menu transition */
         #mobile-menu {
             transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
@@ -64,43 +72,59 @@
 <script type="importmap">
 {
   "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
     "react": "https://esm.sh/react@^19.2.4",
-    "lucide-react": "https://esm.sh/lucide-react@^0.574.0",
-    "react/": "https://esm.sh/react@^19.2.4/"
+    "lucide-react": "https://esm.sh/lucide-react@^0.574.0"
   }
 }
 </script>
 </head>
-<body class="bg-cream text-chocolate font-sans antialiased selection:bg-icepink selection:text-white">
+<body class="bg-cream dark:bg-neutral-900 text-chocolate dark:text-gray-100 font-sans antialiased selection:bg-icepink selection:text-white transition-colors duration-300">
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-cream/90 backdrop-blur-md shadow-sm border-b border-chocolate/5">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-cream/90 dark:bg-neutral-900/90 backdrop-blur-md shadow-sm border-b border-chocolate/5 dark:border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer transition-transform hover:scale-105">
                     <i class="ph-fill ph-ice-cream text-icepink text-3xl"></i>
-                    <a href="#" class="font-serif font-bold text-2xl text-chocolate tracking-tight">
+                    <a href="#" class="font-serif font-bold text-2xl text-chocolate dark:text-white tracking-tight">
                         La Dulce Vida 🍦
                     </a>
                 </div>
 
                 <!-- Desktop Menu -->
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#inicio" class="text-chocolate hover:text-icepink font-medium transition-colors">Inicio</a>
-                        <a href="#nosotros" class="text-chocolate hover:text-icepink font-medium transition-colors">Nosotros</a>
-                        <a href="#sabores" class="text-chocolate hover:text-icepink font-medium transition-colors">Sabores</a>
-                        <a href="#galeria" class="text-chocolate hover:text-icepink font-medium transition-colors">Galería</a>
-                        <a href="#resenas" class="text-chocolate hover:text-icepink font-medium transition-colors">Reseñas</a>
-                        <a href="#ubicacion" class="text-chocolate hover:text-icepink font-medium transition-colors">Ubicación</a>
-                        <a href="#contacto" class="bg-icepink text-white px-5 py-2 rounded-full hover:bg-pink-600 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Contacto</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <div class="flex items-baseline space-x-6">
+                        <a href="#inicio" data-i18n="nav_home" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Inicio</a>
+                        <a href="#nosotros" data-i18n="nav_about" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Nosotros</a>
+                        <a href="#sabores" data-i18n="nav_flavors" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Sabores</a>
+                        <a href="#galeria" data-i18n="nav_gallery" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Galería</a>
+                        <a href="#resenas" data-i18n="nav_reviews" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Reseñas</a>
+                        <a href="#ubicacion" data-i18n="nav_location" class="text-chocolate dark:text-gray-200 hover:text-icepink dark:hover:text-icepink font-medium transition-colors">Ubicación</a>
+                        <a href="#contacto" data-i18n="nav_contact" class="bg-icepink text-white px-5 py-2 rounded-full hover:bg-pink-600 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Contacto</a>
+                    </div>
+                    
+                    <!-- Settings (Lang + Theme) -->
+                    <div class="flex items-center gap-3 pl-4 border-l border-chocolate/10 dark:border-white/10">
+                        <!-- Language -->
+                        <div class="flex items-center bg-white/50 dark:bg-black/20 rounded-full p-1 border border-chocolate/10 dark:border-white/10">
+                            <button onclick="setLanguage('es')" id="btn-es" class="px-2 py-1 rounded-full text-xs font-bold transition-all">ES</button>
+                            <button onclick="setLanguage('en')" id="btn-en" class="px-2 py-1 rounded-full text-xs font-bold transition-all">EN</button>
+                        </div>
+                        <!-- Theme Toggle -->
+                        <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-chocolate/5 dark:hover:bg-white/10 transition-colors text-chocolate dark:text-icepink" aria-label="Toggle Dark Mode">
+                            <i id="theme-icon" class="ph-fill ph-moon text-xl"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-chocolate hover:text-icepink focus:outline-none">
+                <div class="md:hidden flex items-center gap-4">
+                     <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-chocolate/5 dark:hover:bg-white/10 transition-colors text-chocolate dark:text-icepink">
+                        <i id="theme-icon-mobile" class="ph-fill ph-moon text-xl"></i>
+                    </button>
+                    <button id="mobile-menu-btn" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-chocolate dark:text-white hover:text-icepink focus:outline-none">
                         <i id="menu-icon" class="ph ph-list text-3xl"></i>
                     </button>
                 </div>
@@ -108,14 +132,20 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden max-h-0 opacity-0 overflow-hidden bg-white shadow-lg">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
-                <a href="#inicio" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate hover:bg-icemint/20">Inicio</a>
-                <a href="#nosotros" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate hover:bg-icemint/20">Nosotros</a>
-                <a href="#sabores" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate hover:bg-icemint/20">Sabores</a>
-                <a href="#galeria" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate hover:bg-icemint/20">Galería</a>
-                <a href="#ubicacion" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate hover:bg-icemint/20">Ubicación</a>
-                <a href="#contacto" class="mobile-link block px-3 py-3 rounded-md text-base font-bold text-icepink hover:bg-icepink/10">Contacto</a>
+        <div id="mobile-menu" class="md:hidden max-h-0 opacity-0 overflow-hidden bg-white dark:bg-neutral-800 shadow-lg border-t border-chocolate/5 dark:border-white/5">
+            <div class="px-4 pt-4 pb-6 space-y-2 text-center">
+                <a href="#inicio" data-i18n="nav_home" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Inicio</a>
+                <a href="#nosotros" data-i18n="nav_about" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Nosotros</a>
+                <a href="#sabores" data-i18n="nav_flavors" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Sabores</a>
+                <a href="#galeria" data-i18n="nav_gallery" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Galería</a>
+                <a href="#ubicacion" data-i18n="nav_location" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-chocolate dark:text-gray-200 hover:bg-icemint/20 dark:hover:bg-neutral-700">Ubicación</a>
+                <a href="#contacto" data-i18n="nav_contact" class="mobile-link block px-3 py-3 rounded-md text-base font-bold text-icepink hover:bg-icepink/10 dark:hover:bg-neutral-700">Contacto</a>
+                
+                <!-- Mobile Lang Switcher -->
+                <div class="flex justify-center pt-4 gap-4">
+                    <button onclick="setLanguage('es')" class="text-sm font-bold text-chocolate dark:text-white underline decoration-icepink decoration-2 underline-offset-4">ESPAÑOL</button>
+                    <button onclick="setLanguage('en')" class="text-sm font-bold text-gray-500 dark:text-gray-400">ENGLISH</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -125,55 +155,55 @@
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
             <img src="https://picsum.photos/id/1015/2000/1200" alt="Vista de La Habana" class="w-full h-full object-cover" loading="eager">
-            <div id="hero-overlay" class="absolute inset-0 bg-black/40 transition-opacity duration-1000 opacity-0"></div>
+            <div id="hero-overlay" class="absolute inset-0 bg-black/40 dark:bg-black/60 transition-opacity duration-1000 opacity-0"></div>
         </div>
 
         <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16">
             <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg animate-float">
-                Gelatería <br>
+                <span data-i18n="hero_title_prefix">Gelatería</span> <br>
                 <span class="text-icepink text-6xl md:text-8xl">La Dulce Vida</span>
             </h1>
-            <p class="text-xl md:text-2xl text-cream mb-10 font-light drop-shadow-md max-w-2xl mx-auto">
+            <p data-i18n="hero_subtitle" class="text-xl md:text-2xl text-cream mb-10 font-light drop-shadow-md max-w-2xl mx-auto">
                 Helados italianos artesanales • La Habana Vieja
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#sabores" class="group bg-icepink text-white px-8 py-4 rounded-full text-lg font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2">
                     <i class="ph-fill ph-ice-cream text-xl group-hover:rotate-12 transition-transform"></i>
-                    Ver Sabores
+                    <span data-i18n="hero_btn_flavors">Ver Sabores</span>
                 </a>
-                <a href="#ubicacion" class="bg-white text-chocolate px-8 py-4 rounded-full text-lg font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2 hover:bg-gray-100">
+                <a href="#ubicacion" class="bg-white dark:bg-neutral-800 text-chocolate dark:text-white px-8 py-4 rounded-full text-lg font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2 hover:bg-gray-100 dark:hover:bg-neutral-700">
                     <i class="ph-bold ph-map-pin text-xl"></i>
-                    Cómo llegar
+                    <span data-i18n="hero_btn_directions">Cómo llegar</span>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="nosotros" class="py-24 bg-cream overflow-hidden">
+    <section id="nosotros" class="py-24 bg-cream dark:bg-neutral-900 overflow-hidden transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20 fade-in-section">
                 <div class="w-full md:w-1/2 relative group">
                     <div class="absolute inset-0 bg-icemint rounded-2xl transform rotate-3 scale-105 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
-                    <img src="https://picsum.photos/id/292/800/600" alt="Nuestra Gelatería" class="relative rounded-2xl shadow-2xl w-full h-auto object-cover transform transition-transform duration-500 hover:scale-[1.02]">
+                    <img src="https://picsum.photos/id/292/800/600" alt="Nuestra Gelatería" class="relative rounded-2xl shadow-2xl w-full h-auto object-cover transform transition-transform duration-500 hover:scale-[1.02] dark:opacity-90">
                 </div>
                 <div class="w-full md:w-1/2 text-center md:text-left">
-                    <span class="text-icepink font-bold tracking-wider uppercase text-sm mb-2 block">Sobre Nosotros</span>
-                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-chocolate mb-6">Pasión por el Gelato</h2>
-                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    <span data-i18n="about_badge" class="text-icepink font-bold tracking-wider uppercase text-sm mb-2 block">Sobre Nosotros</span>
+                    <h2 data-i18n="about_title" class="font-serif text-4xl md:text-5xl font-bold text-chocolate dark:text-white mb-6">Pasión por el Gelato</h2>
+                    <p data-i18n="about_text1" class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                         Bienvenidos a <span class="font-bold text-icepink">La Dulce Vida</span>, tu gelatería italiana en el corazón de La Habana Vieja. Ingredientes naturales, sabores auténticos y precios accesibles.
                     </p>
-                    <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    <p data-i18n="about_text2" class="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
                         Ambiente familiar y acogedor, donde cada cucharada te transporta directamente a Italia mientras disfrutas de la brisa habanera.
                     </p>
-                    <div class="flex items-center justify-center md:justify-start gap-4 text-chocolate font-medium">
+                    <div class="flex items-center justify-center md:justify-start gap-4 text-chocolate dark:text-white font-medium">
                         <div class="flex items-center gap-2">
                             <i class="ph-fill ph-plant text-icemint text-2xl"></i>
-                            <span>100% Natural</span>
+                            <span data-i18n="about_natural">100% Natural</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <i class="ph-fill ph-heart text-icepink text-2xl"></i>
-                            <span>Hecho con amor</span>
+                            <span data-i18n="about_love">Hecho con amor</span>
                         </div>
                     </div>
                 </div>
@@ -182,112 +212,112 @@
     </section>
 
     <!-- Flavors Menu -->
-    <section id="sabores" class="py-24 bg-white">
+    <section id="sabores" class="py-24 bg-white dark:bg-neutral-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in-section">
-                <h2 class="font-serif text-4xl md:text-5xl font-bold text-chocolate mb-4">Nuestros Sabores</h2>
+                <h2 data-i18n="menu_title" class="font-serif text-4xl md:text-5xl font-bold text-chocolate dark:text-white mb-4">Nuestros Sabores</h2>
                 <div class="h-1 w-24 bg-icepink mx-auto rounded-full"></div>
-                <p class="mt-4 text-gray-600">Frescos del día, cremosos y deliciosos.</p>
+                <p data-i18n="menu_subtitle" class="mt-4 text-gray-600 dark:text-gray-400">Frescos del día, cremosos y deliciosos.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Flavor Cards -->
                 <!-- Limón -->
-                <div class="bg-cream rounded-xl p-6 shadow-md border border-chocolate/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
                     <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
                         <img src="https://picsum.photos/id/133/600/600" alt="Limón" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
                         <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                            <i class="ph-fill ph-star inline mr-1"></i>Popular
+                            <i class="ph-fill ph-star inline mr-1"></i><span data-i18n="tag_popular">Popular</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-serif text-2xl font-bold text-chocolate">Limón</h3>
+                        <h3 data-i18n="flavor_lemon" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Limón</h3>
                         <span class="text-2xl">🍋</span>
                     </div>
-                    <p class="text-gray-600 text-sm">Refrescante y ácido, perfecto para el calor de Cuba.</p>
+                    <p data-i18n="flavor_lemon_desc" class="text-gray-600 dark:text-gray-300 text-sm">Refrescante y ácido, perfecto para el calor de Cuba.</p>
                 </div>
 
                 <!-- Amarena -->
-                <div class="bg-cream rounded-xl p-6 shadow-md border border-chocolate/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
                     <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
                         <img src="https://picsum.photos/id/201/600/600" alt="Amarena" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
                     </div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-serif text-2xl font-bold text-chocolate">Amarena</h3>
+                        <h3 class="font-serif text-2xl font-bold text-chocolate dark:text-white">Amarena</h3>
                         <span class="text-2xl">🍒</span>
                     </div>
-                    <p class="text-gray-600 text-sm">Crema con deliciosas cerezas negras italianas.</p>
+                    <p data-i18n="flavor_amarena_desc" class="text-gray-600 dark:text-gray-300 text-sm">Crema con deliciosas cerezas negras italianas.</p>
                 </div>
 
                 <!-- Guayaba -->
-                <div class="bg-cream rounded-xl p-6 shadow-md border border-chocolate/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
                     <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
                         <img src="https://picsum.photos/id/1060/600/600" alt="Guayaba" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
                         <div class="absolute top-2 right-2 bg-icemint text-teal-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                            <i class="ph-fill ph-leaf inline mr-1"></i>Vegano
+                            <i class="ph-fill ph-leaf inline mr-1"></i><span data-i18n="tag_vegan">Vegano</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-serif text-2xl font-bold text-chocolate">Guayaba</h3>
+                        <h3 data-i18n="flavor_guava" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Guayaba</h3>
                         <span class="text-2xl">🍈</span>
                     </div>
-                    <p class="text-gray-600 text-sm">El sabor de la isla. Pura fruta tropical.</p>
+                    <p data-i18n="flavor_guava_desc" class="text-gray-600 dark:text-gray-300 text-sm">El sabor de la isla. Pura fruta tropical.</p>
                 </div>
 
                 <!-- Melón -->
-                <div class="bg-cream rounded-xl p-6 shadow-md border border-chocolate/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
                     <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
                         <img src="https://picsum.photos/id/870/600/600" alt="Melón" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
                         <div class="absolute top-2 right-2 bg-icemint text-teal-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                            <i class="ph-fill ph-leaf inline mr-1"></i>Vegano
+                            <i class="ph-fill ph-leaf inline mr-1"></i><span data-i18n="tag_vegan">Vegano</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-serif text-2xl font-bold text-chocolate">Melón</h3>
+                        <h3 data-i18n="flavor_melon" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Melón</h3>
                         <span class="text-2xl">🍉</span>
                     </div>
-                    <p class="text-gray-600 text-sm">Dulce, suave y muy hidratante.</p>
+                    <p data-i18n="flavor_melon_desc" class="text-gray-600 dark:text-gray-300 text-sm">Dulce, suave y muy hidratante.</p>
                 </div>
 
                 <!-- Papaya -->
-                <div class="bg-cream rounded-xl p-6 shadow-md border border-chocolate/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
                     <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
                         <img src="https://picsum.photos/id/1018/600/600" alt="Papaya" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
                         <div class="absolute top-2 right-2 bg-icemint text-teal-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                            <i class="ph-fill ph-leaf inline mr-1"></i>Vegano
+                            <i class="ph-fill ph-leaf inline mr-1"></i><span data-i18n="tag_vegan">Vegano</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-serif text-2xl font-bold text-chocolate">Fruta Bomba</h3>
+                        <h3 data-i18n="flavor_papaya" class="font-serif text-2xl font-bold text-chocolate dark:text-white">Fruta Bomba</h3>
                         <span class="text-2xl">🟠</span>
                     </div>
-                    <p class="text-gray-600 text-sm">Textura cremosa natural de la fruta bomba.</p>
+                    <p data-i18n="flavor_papaya_desc" class="text-gray-600 dark:text-gray-300 text-sm">Textura cremosa natural de la fruta bomba.</p>
                 </div>
 
                 <!-- Chocolate -->
-                <div class="bg-cream rounded-xl p-6 shadow-md border border-chocolate/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
+                <div class="bg-cream dark:bg-neutral-700 rounded-xl p-6 shadow-md border border-chocolate/5 dark:border-white/5 hover:shadow-2xl hover:scale-105 transition-all duration-300 group fade-in-section">
                     <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
                         <img src="https://picsum.photos/id/292/600/600" alt="Chocolate" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy">
                     </div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-serif text-2xl font-bold text-chocolate">Chocolate</h3>
+                        <h3 class="font-serif text-2xl font-bold text-chocolate dark:text-white">Chocolate</h3>
                         <span class="text-2xl">🍫</span>
                     </div>
-                    <p class="text-gray-600 text-sm">Intenso, oscuro y adictivo.</p>
+                    <p data-i18n="flavor_chocolate_desc" class="text-gray-600 dark:text-gray-300 text-sm">Intenso, oscuro y adictivo.</p>
                 </div>
             </div>
             
             <div class="mt-12 text-center">
-                 <p class="text-chocolate font-medium italic">...y muchos más: Tiramisú, Stracciatella, Naranja.</p>
+                 <p data-i18n="menu_more" class="text-chocolate dark:text-gray-300 font-medium italic">...y muchos más: Tiramisú, Stracciatella, Naranja.</p>
             </div>
         </div>
     </section>
 
     <!-- Gallery -->
-    <section id="galeria" class="py-24 bg-cream">
+    <section id="galeria" class="py-24 bg-cream dark:bg-neutral-900 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in-section">
-                <h2 class="font-serif text-4xl font-bold text-chocolate mb-4">Momentos Dulces</h2>
+                <h2 data-i18n="gallery_title" class="font-serif text-4xl font-bold text-chocolate dark:text-white mb-4">Momentos Dulces</h2>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
                 <div class="col-span-2 row-span-2 overflow-hidden rounded-2xl shadow-lg fade-in-section">
@@ -310,18 +340,18 @@
     </section>
 
     <!-- Reviews -->
-    <section id="resenas" class="py-24 bg-white relative">
-        <div class="absolute top-0 left-0 w-32 h-32 bg-icepink rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+    <section id="resenas" class="py-24 bg-white dark:bg-neutral-800 relative transition-colors duration-300">
+        <div class="absolute top-0 left-0 w-32 h-32 bg-icepink rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-3xl opacity-20 dark:opacity-10 animate-pulse"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <h2 class="font-serif text-4xl font-bold text-center text-chocolate mb-16 fade-in-section">Lo que dicen nuestros clientes</h2>
+            <h2 data-i18n="reviews_title" class="font-serif text-4xl font-bold text-center text-chocolate dark:text-white mb-16 fade-in-section">Lo que dicen nuestros clientes</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Review 1 -->
-                <div class="bg-cream p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in-section">
+                <div class="bg-cream dark:bg-neutral-700 p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in-section">
                     <div class="text-icepink mb-3"><i class="ph-fill ph-quotes text-3xl"></i></div>
-                    <p class="text-gray-700 italic mb-4">"¡El mejor helado de pistacho que he probado fuera de Italia! Un lugar obligado en La Habana."</p>
-                    <div class="flex items-center justify-between border-t border-chocolate/10 pt-4">
-                        <span class="font-bold text-chocolate">Jordan S.</span>
+                    <p class="text-gray-700 dark:text-gray-300 italic mb-4">"¡El mejor helado de pistacho que he probado fuera de Italia! Un lugar obligado en La Habana."</p>
+                    <div class="flex items-center justify-between border-t border-chocolate/10 dark:border-white/10 pt-4">
+                        <span class="font-bold text-chocolate dark:text-white">Jordan S.</span>
                         <div class="flex text-yellow-400 text-sm">
                             <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                         </div>
@@ -329,11 +359,11 @@
                 </div>
 
                 <!-- Review 2 -->
-                <div class="bg-cream p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in-section" style="transition-delay: 100ms">
+                <div class="bg-cream dark:bg-neutral-700 p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in-section" style="transition-delay: 100ms">
                     <div class="text-icepink mb-3"><i class="ph-fill ph-quotes text-3xl"></i></div>
-                    <p class="text-gray-700 italic mb-4">"Ambiente encantador y el personal muy amable. El sabor de guayaba es increíble."</p>
-                    <div class="flex items-center justify-between border-t border-chocolate/10 pt-4">
-                        <span class="font-bold text-chocolate">Niamh</span>
+                    <p class="text-gray-700 dark:text-gray-300 italic mb-4">"Ambiente encantador y el personal muy amable. El sabor de guayaba es increíble."</p>
+                    <div class="flex items-center justify-between border-t border-chocolate/10 dark:border-white/10 pt-4">
+                        <span class="font-bold text-chocolate dark:text-white">Niamh</span>
                         <div class="flex text-yellow-400 text-sm">
                             <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                         </div>
@@ -341,11 +371,11 @@
                 </div>
 
                 <!-- Review 3 -->
-                <div class="bg-cream p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in-section" style="transition-delay: 200ms">
+                <div class="bg-cream dark:bg-neutral-700 p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in-section" style="transition-delay: 200ms">
                     <div class="text-icepink mb-3"><i class="ph-fill ph-quotes text-3xl"></i></div>
-                    <p class="text-gray-700 italic mb-4">"Precios muy justos para la calidad que ofrecen. Volveré seguro."</p>
-                    <div class="flex items-center justify-between border-t border-chocolate/10 pt-4">
-                        <span class="font-bold text-chocolate">Deyvisson</span>
+                    <p class="text-gray-700 dark:text-gray-300 italic mb-4">"Precios muy justos para la calidad que ofrecen. Volveré seguro."</p>
+                    <div class="flex items-center justify-between border-t border-chocolate/10 dark:border-white/10 pt-4">
+                        <span class="font-bold text-chocolate dark:text-white">Deyvisson</span>
                         <div class="flex text-yellow-400 text-sm">
                             <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
                         </div>
@@ -353,11 +383,11 @@
                 </div>
 
                 <!-- Review 4 -->
-                <div class="bg-cream p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in-section" style="transition-delay: 300ms">
+                <div class="bg-cream dark:bg-neutral-700 p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in-section" style="transition-delay: 300ms">
                     <div class="text-icepink mb-3"><i class="ph-fill ph-quotes text-3xl"></i></div>
-                    <p class="text-gray-700 italic mb-4">"Lugar perfecto para descansar después de caminar por la Habana Vieja. Muy refrescante."</p>
-                    <div class="flex items-center justify-between border-t border-chocolate/10 pt-4">
-                        <span class="font-bold text-chocolate">Tamara</span>
+                    <p class="text-gray-700 dark:text-gray-300 italic mb-4">"Lugar perfecto para descansar después de caminar por la Habana Vieja. Muy refrescante."</p>
+                    <div class="flex items-center justify-between border-t border-chocolate/10 dark:border-white/10 pt-4">
+                        <span class="font-bold text-chocolate dark:text-white">Tamara</span>
                         <div class="flex text-yellow-400 text-sm">
                             <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-regular ph-star"></i>
                         </div>
@@ -368,37 +398,37 @@
     </section>
 
     <!-- Location -->
-    <section id="ubicacion" class="py-24 bg-cream">
+    <section id="ubicacion" class="py-24 bg-cream dark:bg-neutral-900 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-section">
-            <div class="flex flex-col lg:flex-row rounded-3xl overflow-hidden shadow-2xl bg-white">
+            <div class="flex flex-col lg:flex-row rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-neutral-800">
                 <div class="lg:w-1/3 p-10 flex flex-col justify-center bg-chocolate text-cream">
-                    <h2 class="font-serif text-3xl font-bold mb-8">Visítanos</h2>
+                    <h2 data-i18n="location_title" class="font-serif text-3xl font-bold mb-8">Visítanos</h2>
                     <div class="space-y-6">
                         <div class="flex gap-4">
                             <i class="ph-fill ph-map-pin text-2xl text-icepink"></i>
                             <div>
-                                <h3 class="font-bold text-lg">Dirección</h3>
-                                <p class="opacity-80">Obispo entre Cuba y San Ignacio,<br>La Habana Vieja</p>
+                                <h3 data-i18n="location_address_title" class="font-bold text-lg">Dirección</h3>
+                                <p data-i18n="location_address" class="opacity-80">Obispo entre Cuba y San Ignacio,<br>La Habana Vieja</p>
                             </div>
                         </div>
                         <div class="flex gap-4">
                             <i class="ph-fill ph-clock text-2xl text-icemint"></i>
                             <div>
-                                <h3 class="font-bold text-lg">Horario</h3>
-                                <p class="opacity-80">Todos los días<br>10:00 AM - 10:00 PM</p>
+                                <h3 data-i18n="location_hours_title" class="font-bold text-lg">Horario</h3>
+                                <p data-i18n="location_hours" class="opacity-80">Todos los días<br>10:00 AM - 10:00 PM</p>
                             </div>
                         </div>
                         <div class="flex gap-4">
                             <i class="ph-fill ph-phone text-2xl text-white"></i>
                             <div>
-                                <h3 class="font-bold text-lg">Contacto</h3>
+                                <h3 data-i18n="location_contact_title" class="font-bold text-lg">Contacto</h3>
                                 <p class="opacity-80">+53 7 860 0000</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="lg:w-2/3 h-80 lg:h-auto bg-gray-200 relative">
-                    <!-- REEMPLAZA AQUÍ CON EL IFRAME REAL DE GOOGLE MAPS -->
+                <div class="lg:w-2/3 h-80 lg:h-auto bg-gray-200 dark:bg-gray-700 relative">
+                    <!-- Placeholder for Google Maps - Replace src with your actual Embed API link -->
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.996173070624!2d-82.3537876844962!3d23.13682998489704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88cd774cbdf600e1%3A0x4e29433130983281!2sObispo%2C%20La%20Habana%2C%20Cuba!5e0!3m2!1ses!2s!4v1620000000000!5m2!1ses!2s" 
                         class="absolute inset-0 w-full h-full grayscale-[50%] hover:grayscale-0 transition-all duration-500" 
@@ -413,37 +443,38 @@
     </section>
 
     <!-- Contact -->
-    <section id="contacto" class="py-24 bg-white">
+    <section id="contacto" class="py-24 bg-white dark:bg-neutral-800 transition-colors duration-300">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 fade-in-section">
-                <h2 class="font-serif text-4xl font-bold text-chocolate">Escríbenos</h2>
-                <p class="text-gray-600 mt-4">¿Preguntas? ¿Pedidos especiales? Estamos aquí.</p>
+                <h2 data-i18n="contact_title" class="font-serif text-4xl font-bold text-chocolate dark:text-white">Escríbenos</h2>
+                <p data-i18n="contact_subtitle" class="text-gray-600 dark:text-gray-400 mt-4">¿Preguntas? ¿Pedidos especiales? Estamos aquí.</p>
             </div>
 
-            <form id="contactForm" action="https://formsubmit.co/TUEMAIL@gmail.com" method="POST" class="space-y-6 fade-in-section">
+            <form id="contactForm" action="https://formsubmit.co/TU_EMAIL_AQUI_@gmail.com" method="POST" class="space-y-6 fade-in-section">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="name" class="block text-sm font-medium text-chocolate mb-1">Nombre</label>
-                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-cream border border-gray-200 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all">
+                        <label data-i18n="label_name" for="name" class="block text-sm font-medium text-chocolate dark:text-gray-300 mb-1">Nombre</label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-cream dark:bg-neutral-700 dark:text-white border border-gray-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all">
                     </div>
                     <div>
-                        <label for="contact" class="block text-sm font-medium text-chocolate mb-1">Email o WhatsApp</label>
-                        <input type="text" id="contact" name="contact" required class="w-full px-4 py-3 bg-cream border border-gray-200 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all">
+                        <label data-i18n="label_contact" for="contact" class="block text-sm font-medium text-chocolate dark:text-gray-300 mb-1">Email o WhatsApp</label>
+                        <input type="text" id="contact" name="contact" required class="w-full px-4 py-3 bg-cream dark:bg-neutral-700 dark:text-white border border-gray-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all">
                     </div>
                 </div>
                 <div>
-                    <label for="message" class="block text-sm font-medium text-chocolate mb-1">Mensaje</label>
-                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-cream border border-gray-200 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all resize-none"></textarea>
+                    <label data-i18n="label_message" for="message" class="block text-sm font-medium text-chocolate dark:text-gray-300 mb-1">Mensaje</label>
+                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-cream dark:bg-neutral-700 dark:text-white border border-gray-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-icepink focus:border-icepink outline-none transition-all resize-none"></textarea>
                 </div>
                 
-                <!-- Anti-spam -->
+                <!-- Anti-spam & Config -->
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="http://localhost:3000/">
+                <!-- Replace with your success page -->
+                <input type="hidden" name="_next" value="https://www.tudominio.com/gracias"> 
                 
                 <div class="text-center">
                     <button type="submit" id="submitBtn" class="inline-flex items-center gap-2 bg-icemint text-white px-10 py-3 rounded-full font-bold text-lg hover:bg-teal-500 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1">
                         <i class="ph-bold ph-paper-plane-right"></i>
-                        Enviar Mensaje
+                        <span data-i18n="btn_send">Enviar Mensaje</span>
                     </button>
                 </div>
             </form>
@@ -451,14 +482,14 @@
             <div class="mt-16 text-center fade-in-section">
                  <a href="https://wa.me/5355555555" target="_blank" class="inline-flex items-center gap-2 bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-green-600 transition-all transform hover:scale-105">
                      <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
-                     Chatea por WhatsApp
+                     <span data-i18n="btn_whatsapp">Chatea por WhatsApp</span>
                  </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-chocolate text-cream py-10 border-t border-white/10">
+    <footer class="bg-chocolate dark:bg-black text-cream py-10 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-2">
                <i class="ph-fill ph-ice-cream text-icepink text-2xl"></i>
@@ -472,7 +503,7 @@
             </div>
 
             <div class="text-center md:text-right text-sm opacity-70">
-                <p>&copy; 2026 Gelatería La Dulce Vida • La Habana, Cuba</p>
+                <p data-i18n="footer_rights">&copy; 2026 Gelatería La Dulce Vida • La Habana, Cuba</p>
             </div>
         </div>
     </footer>
@@ -482,9 +513,180 @@
         <i class="ph-bold ph-arrow-up text-xl"></i>
     </button>
 
-    <!-- Scripts -->
+    <!-- Logic -->
     <script>
+        const translations = {
+            es: {
+                nav_home: "Inicio",
+                nav_about: "Nosotros",
+                nav_flavors: "Sabores",
+                nav_gallery: "Galería",
+                nav_reviews: "Reseñas",
+                nav_location: "Ubicación",
+                nav_contact: "Contacto",
+                hero_title_prefix: "Gelatería",
+                hero_subtitle: "Helados italianos artesanales • La Habana Vieja",
+                hero_btn_flavors: "Ver Sabores",
+                hero_btn_directions: "Cómo llegar",
+                about_badge: "Sobre Nosotros",
+                about_title: "Pasión por el Gelato",
+                about_text1: "Bienvenidos a <span class='font-bold text-icepink'>La Dulce Vida</span>, tu gelatería italiana en el corazón de La Habana Vieja. Ingredientes naturales, sabores auténticos y precios accesibles.",
+                about_text2: "Ambiente familiar y acogedor, donde cada cucharada te transporta directamente a Italia mientras disfrutas de la brisa habanera.",
+                about_natural: "100% Natural",
+                about_love: "Hecho con amor",
+                menu_title: "Nuestros Sabores",
+                menu_subtitle: "Frescos del día, cremosos y deliciosos.",
+                flavor_lemon: "Limón",
+                flavor_lemon_desc: "Refrescante y ácido, perfecto para el calor de Cuba.",
+                flavor_amarena_desc: "Crema con deliciosas cerezas negras italianas.",
+                flavor_guava: "Guayaba",
+                flavor_guava_desc: "El sabor de la isla. Pura fruta tropical.",
+                flavor_melon: "Melón",
+                flavor_melon_desc: "Dulce, suave y muy hidratante.",
+                flavor_papaya: "Fruta Bomba",
+                flavor_papaya_desc: "Textura cremosa natural de la fruta bomba.",
+                flavor_chocolate_desc: "Intenso, oscuro y adictivo.",
+                menu_more: "...y muchos más: Tiramisú, Stracciatella, Naranja.",
+                gallery_title: "Momentos Dulces",
+                reviews_title: "Lo que dicen nuestros clientes",
+                location_title: "Visítanos",
+                location_address_title: "Dirección",
+                location_address: "Obispo entre Cuba y San Ignacio,<br>La Habana Vieja",
+                location_hours_title: "Horario",
+                location_hours: "Todos los días<br>10:00 AM - 10:00 PM",
+                location_contact_title: "Contacto",
+                contact_title: "Escríbenos",
+                contact_subtitle: "¿Preguntas? ¿Pedidos especiales? Estamos aquí.",
+                label_name: "Nombre",
+                label_contact: "Email o WhatsApp",
+                label_message: "Mensaje",
+                btn_send: "Enviar Mensaje",
+                btn_whatsapp: "Chatea por WhatsApp",
+                footer_rights: "&copy; 2026 Gelatería La Dulce Vida • La Habana, Cuba",
+                tag_popular: "Popular",
+                tag_vegan: "Vegano"
+            },
+            en: {
+                nav_home: "Home",
+                nav_about: "About",
+                nav_flavors: "Flavors",
+                nav_gallery: "Gallery",
+                nav_reviews: "Reviews",
+                nav_location: "Location",
+                nav_contact: "Contact",
+                hero_title_prefix: "Gelato Shop",
+                hero_subtitle: "Artisanal Italian Gelato • Old Havana",
+                hero_btn_flavors: "See Flavors",
+                hero_btn_directions: "Get Directions",
+                about_badge: "About Us",
+                about_title: "Passion for Gelato",
+                about_text1: "Welcome to <span class='font-bold text-icepink'>La Dulce Vida</span>, your Italian gelato shop in the heart of Old Havana. Natural ingredients, authentic flavors, and affordable prices.",
+                about_text2: "A cozy family atmosphere where every spoonful transports you directly to Italy while enjoying the Havana breeze.",
+                about_natural: "100% Natural",
+                about_love: "Made with Love",
+                menu_title: "Our Flavors",
+                menu_subtitle: "Fresh daily, creamy and delicious.",
+                flavor_lemon: "Lemon",
+                flavor_lemon_desc: "Refreshing and tart, perfect for the Cuban heat.",
+                flavor_amarena_desc: "Cream with delicious Italian black cherries.",
+                flavor_guava: "Guava",
+                flavor_guava_desc: "The flavor of the island. Pure tropical fruit.",
+                flavor_melon: "Melon",
+                flavor_melon_desc: "Sweet, smooth, and very hydrating.",
+                flavor_papaya: "Papaya",
+                flavor_papaya_desc: "Natural creamy texture of papaya.",
+                flavor_chocolate_desc: "Intense, dark, and addictive.",
+                menu_more: "...and many more: Tiramisu, Stracciatella, Orange.",
+                gallery_title: "Sweet Moments",
+                reviews_title: "What Our Customers Say",
+                location_title: "Visit Us",
+                location_address_title: "Address",
+                location_address: "Obispo between Cuba and San Ignacio,<br>Old Havana",
+                location_hours_title: "Hours",
+                location_hours: "Every day<br>10:00 AM - 10:00 PM",
+                location_contact_title: "Contact",
+                contact_title: "Write to Us",
+                contact_subtitle: "Questions? Special orders? We are here.",
+                label_name: "Name",
+                label_contact: "Email or WhatsApp",
+                label_message: "Message",
+                btn_send: "Send Message",
+                btn_whatsapp: "Chat on WhatsApp",
+                footer_rights: "&copy; 2026 La Dulce Vida Gelato • Havana, Cuba",
+                tag_popular: "Popular",
+                tag_vegan: "Vegan"
+            }
+        };
+
+        // Dark Mode Logic
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                updateThemeIcon('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                updateThemeIcon('dark');
+            }
+        }
+
+        function updateThemeIcon(mode) {
+            const icons = document.querySelectorAll('#theme-icon, #theme-icon-mobile');
+            icons.forEach(icon => {
+                if (mode === 'dark') {
+                    icon.classList.remove('ph-moon');
+                    icon.classList.add('ph-sun');
+                } else {
+                    icon.classList.remove('ph-sun');
+                    icon.classList.add('ph-moon');
+                }
+            });
+        }
+
+        // Language Logic
+        function setLanguage(lang) {
+            localStorage.setItem('language', lang);
+            updateContent(lang);
+            updateLangButtons(lang);
+        }
+
+        function updateContent(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    // Use innerHTML to allow simple HTML tags like <br> or <span>
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        function updateLangButtons(lang) {
+            const btnEs = document.getElementById('btn-es');
+            const btnEn = document.getElementById('btn-en');
+            
+            // Reset base styles
+            const inactiveClass = "text-chocolate dark:text-cream hover:bg-chocolate/10 dark:hover:bg-white/10 bg-transparent";
+            const activeClass = "text-white bg-chocolate";
+
+            if (lang === 'es') {
+                btnEs.className = `px-2 py-1 rounded-full text-xs font-bold transition-all ${activeClass}`;
+                btnEn.className = `px-2 py-1 rounded-full text-xs font-bold transition-all ${inactiveClass}`;
+            } else {
+                btnEn.className = `px-2 py-1 rounded-full text-xs font-bold transition-all ${activeClass}`;
+                btnEs.className = `px-2 py-1 rounded-full text-xs font-bold transition-all ${inactiveClass}`;
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Init Theme Icon
+            const isDark = document.documentElement.classList.contains('dark');
+            updateThemeIcon(isDark ? 'dark' : 'light');
+
+            // Init Language
+            const savedLang = localStorage.getItem('language') || 'es';
+            setLanguage(savedLang);
+
             // Mobile Menu Logic
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
@@ -523,7 +725,7 @@
                 document.getElementById('hero-overlay').classList.remove('opacity-0');
             }, 100);
 
-            // Intersection Observer for Animations
+            // Intersection Observer
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
@@ -543,7 +745,7 @@
                 observer.observe(section);
             });
 
-            // Scroll Logic (Navbar & BackToTop)
+            // Scroll Logic
             const navbar = document.getElementById('navbar');
             const backToTop = document.getElementById('backToTop');
 
@@ -561,23 +763,13 @@
                 }
             });
 
+
             backToTop.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // Form Submit Feedback
-            const form = document.getElementById('contactForm');
-            form.addEventListener('submit', (e) => {
-                // Let the default action happen (formsubmit.co), 
-                // but we can add a small UI feedback immediately
-                const btn = document.getElementById('submitBtn');
-                btn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> Enviando...';
-                btn.classList.add('opacity-75', 'cursor-not-allowed');
-                // The page will likely redirect or reload depending on formsubmit config
             });
         });
     </script>
     
-    <!-- Web hecha con ❤️ en Cuba usando solo herramientas gratuitas -->
+    <!-- Versión mejorada con modo oscuro y bilingual - Hecha con ❤️ en Cuba -->
 </body>
 </html>
